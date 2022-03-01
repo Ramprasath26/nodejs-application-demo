@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: nodejs-application-test
+    app.kubernetes.io/instance: nodejs-application-instance-test
+    app.kubernetes.io/version: '1.0.0'
+    app.kubernetes.io/managed-by: kubectl
+  name: nodejs-application-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-application-test
+  template:
+    metadata:
+      labels:
+        app: nodejs-application-test
+    spec:
+      containers:
+        - image: heroku/nodejs-hello-world:latest
+          imagePullPolicy: Always
+          name: nodejs-hello-world
+          ports:
+            - containerPort: 3000

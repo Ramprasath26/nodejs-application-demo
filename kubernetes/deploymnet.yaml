@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: nodejs-application
+    app.kubernetes.io/instance: nodejs-application-instance
+    app.kubernetes.io/version: '1.0.0'
+    app.kubernetes.io/managed-by: kubectl
+  name: nodejs-application-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs-application-deploy
+  template:
+    metadata:
+      labels:
+        app: nodejs-application-deploy
+    spec:
+      containers:
+        - image: 830030887191.dkr.ecr.us-west-2.amazonaws.com/nodejs-application-hello-world:latest
+          imagePullPolicy: Always
+          name: nodejs-application-hello-world
+          ports:
+            - containerPort: 3000

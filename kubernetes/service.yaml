@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: nodejs-application
+    app.kubernetes.io/instance: nodejs-application-instance
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/component: service
+    app.kubernetes.io/managed-by: kubectl
+  name: nodejs-application-svc
+spec:
+  selector:
+    app: nodejs-application-deploy
+  type: LoadBalancer
+  ports:
+   -  protocol: TCP
+      port: 80
+      targetPort: 3000
